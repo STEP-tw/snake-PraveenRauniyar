@@ -1,0 +1,4 @@
+Record the last Position of every direction.
+Give the condition for stop game.
+Provide the Play Again Button.
+Stop the game when snake eats itself.
