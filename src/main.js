@@ -8,7 +8,7 @@ const stopGame = function (head) {
   let xPosition = head.x;
   let yPosition = head.y;
   let direction = head.direction;
-  checkPositions(xPosition,yPosition,direction);
+  checkPositionsAndStopGame(xPosition,yPosition,direction);
 }
 
 const isXAxisEastEdgePosition = function (xPosition,direction) {
@@ -39,7 +39,7 @@ const isAnyEdgePosition = function(xPosition,yPosition,direction){
   return isXAxisEdgePosition(xPosition,direction) || isYAxisEdgePosition (yPosition,direction);
 }
 
-const checkPositions = function(xPosition,yPosition,direction){
+const checkPositionsAndStopGame = function(xPosition,yPosition,direction){
   if(isAnyEdgePosition(xPosition,yPosition,direction)){
     clearInterval(animator);
     document.getElementById("stopGame").innerText ="Game Over"
