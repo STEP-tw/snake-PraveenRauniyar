@@ -26,6 +26,7 @@ Position.prototype.next=function() {
 Position.prototype.turnLeft=function() {
   let currentIndex=_directions.lastIndexOf(this.direction);
   let newDirection=_directions[currentIndex-1];
+  // console.log(this.x);
   return new Position(this.x,this.y,newDirection);
 }
 
