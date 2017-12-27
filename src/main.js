@@ -12,7 +12,7 @@ const stopGame = function (head) {
 }
 
 const isXAxisEastEdgePosition = function (xPosition,direction) {
-  return xPosition == 120 && direction == "east"
+  return xPosition == 119 && direction == "east"
 };
 
 const isYAxisSouthEdgePosition = function (yPosition,direction) {
