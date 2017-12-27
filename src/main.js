@@ -15,7 +15,7 @@ const isXAxisEastEdgePosition = function (xPosition,direction) {
   return xPosition == 120 && direction == "east"
 };
 
-const isYAxisNorthEdgePosition = function (yPosition,direction) {
+const isYAxisSouthEdgePosition = function (yPosition,direction) {
   return yPosition == 60 && direction == "south"
 };
 
@@ -23,7 +23,7 @@ const isXAxisWestEdgePosition = function (xPosition,direction) {
   return xPosition == 0 && direction == "west"
 };
 
-const isYAxisSouthEdgePosition = function (yPosition,direction) {
+const isYAxisNorthEdgePosition = function (yPosition,direction) {
   return yPosition == 0 && direction == "north"
 }
 
@@ -45,10 +45,10 @@ const checkPositions = function(xPosition,yPosition,direction){
     document.getElementById("stopGame").innerText ="Game Over"
   }
 };
-
+//
 const playAgain = function () {
   document.getElementById("stopGame").innerText ="";
-  startGame();
+  location.reload();
 };
 
 const animateSnake=function() {
@@ -108,7 +108,6 @@ const startGame=function() {
   drawFood(food);
   addKeyListener();
   animator=setInterval(animateSnake,140);
-  // stopGame()
 }
 
 window.onload=startGame;
