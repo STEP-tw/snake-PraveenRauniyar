@@ -11,22 +11,44 @@ const stopGame = function (head) {
   checkPositions(xPosition,yPosition,direction);
 }
 
+const isXAxisEastEdgePosition = function (xPosition,direction) {
+  return xPosition == 120 && direction == "east"
+};
+
+const isYAxisNorthEdgePosition = function (yPosition,direction) {
+  return yPosition == 60 && direction == "south"
+};
+
+const isXAxisWestEdgePosition = function (xPosition,direction) {
+  return xPosition == 0 && direction == "west"
+};
+
+const isYAxisSouthEdgePosition = function (yPosition,direction) {
+  return yPosition == 0 && direction == "north"
+}
+
+const isYAxisEdgePosition = function (yPosition,direction) {
+  return isYAxisNorthEdgePosition(yPosition,direction) || isYAxisSouthEdgePosition(yPosition,direction)
+};
+
+const isXAxisEdgePosition = function (xPosition,direction) {
+  return isXAxisEastEdgePosition(xPosition,direction) || isXAxisWestEdgePosition(xPosition,direction)
+}
+
+const isAnyEdgePosition = function(xPosition,yPosition,direction){
+  return isXAxisEdgePosition(xPosition,direction) || isYAxisEdgePosition (yPosition,direction);
+}
+
 const checkPositions = function(xPosition,yPosition,direction){
-  if(xPosition == 120 && direction == "east"){
-    console.log(xPosition == 120 && direction == "east");
+  if(isAnyEdgePosition(xPosition,yPosition,direction)){
     clearInterval(animator);
-  };
-  if(xPosition == 0 && direction == "west"){
-    clearInterval(animator);
+    document.getElementById("stopGame").innerText ="Game Over"
+  }
+};
 
-  };
-  if(yPosition == 0 && direction == "north"){
-    clearInterval(animator);
-
-  };
-  if(yPosition == 60 && direction == "south"){
-    clearInterval(animator);
-  };
+const playAgain = function () {
+  document.getElementById("stopGame").innerText ="";
+  startGame();
 };
 
 const animateSnake=function() {
