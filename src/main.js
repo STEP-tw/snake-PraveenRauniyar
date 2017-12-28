@@ -20,12 +20,11 @@ const isYAxisEdgePosition = function (yPosition) {
 }
 
 const isAnyEdgePosition = function(xPosition,yPosition){
-  return isXAxisEdgePosition(xPosition) || isYAxisEdgePosition (yPosition) ||
-  snake.isSnakeCollideItself();
+  return isXAxisEdgePosition(xPosition) || isYAxisEdgePosition (yPosition);
 }
 
 const checkPositionsAndStopGame = function(xPosition,yPosition){
-  if(isAnyEdgePosition(xPosition,yPosition)){
+  if(isAnyEdgePosition(xPosition,yPosition)||snake.isSnakeEatingItself()){
     clearInterval(animator);
     document.getElementById("stopGame").innerText ="Game Over";
   }
@@ -92,7 +91,7 @@ const startGame=function() {
   createFood(numberOfRows,numberOfCols);
   drawFood(food);
   addKeyListener();
-  animator=setInterval(animateSnake,50);
+  animator=setInterval(animateSnake,500);
 }
 
 window.onload=startGame;

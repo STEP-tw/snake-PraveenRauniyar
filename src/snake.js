@@ -24,12 +24,10 @@ Snake.prototype = {
   turnRight: function() {
     this.head = this.head.turnRight();
   },
-  isSnakeCollideItself : function() {
-    // let body = this.body.sli;
-    // console.log(this.body[1].x);
-    // console.log(this.body[1].y);
+  isSnakeEatingItself : function() {
+    let headPosition = this.head
     return this.body.some(function(bodyPosition) {
-      return bodyPosition.x == this.head.x && bodyPosition.y == this.head.y;
+      return bodyPosition.x == headPosition.x && bodyPosition.y == headPosition.y;
     });
   }
 }
