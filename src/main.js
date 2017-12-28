@@ -7,42 +7,27 @@ let animator=undefined;
 const stopGame = function (head) {
   let xPosition = head.x;
   let yPosition = head.y;
-  let direction = head.direction;
-  checkPositionsAndStopGame(xPosition,yPosition,direction);
+  checkPositionsAndStopGame(xPosition,yPosition);
 }
 
-const isXAxisEastEdgePosition = function (xPosition,direction) {
-  return xPosition == 119 && direction == "east"
+const isXAxisEdgePosition = function (xPosition) {
+  return xPosition == 0 || xPosition == numberOfCols;
 };
 
-const isYAxisSouthEdgePosition = function (yPosition,direction) {
-  return yPosition == 60 && direction == "south"
-};
+const isYAxisEdgePosition = function (yPosition) {
+  return yPosition == 0 || yPosition == numberOfRows;
 
-const isXAxisWestEdgePosition = function (xPosition,direction) {
-  return xPosition == 0 && direction == "west"
-};
-
-const isYAxisNorthEdgePosition = function (yPosition,direction) {
-  return yPosition == 0 && direction == "north"
 }
 
-const isYAxisEdgePosition = function (yPosition,direction) {
-  return isYAxisNorthEdgePosition(yPosition,direction) || isYAxisSouthEdgePosition(yPosition,direction)
-};
-
-const isXAxisEdgePosition = function (xPosition,direction) {
-  return isXAxisEastEdgePosition(xPosition,direction) || isXAxisWestEdgePosition(xPosition,direction)
+const isAnyEdgePosition = function(xPosition,yPosition){
+  return isXAxisEdgePosition(xPosition) || isYAxisEdgePosition (yPosition) ||
+  snake.isSnakeCollideItself();
 }
 
-const isAnyEdgePosition = function(xPosition,yPosition,direction){
-  return isXAxisEdgePosition(xPosition,direction) || isYAxisEdgePosition (yPosition,direction);
-}
-
-const checkPositionsAndStopGame = function(xPosition,yPosition,direction){
-  if(isAnyEdgePosition(xPosition,yPosition,direction)){
+const checkPositionsAndStopGame = function(xPosition,yPosition){
+  if(isAnyEdgePosition(xPosition,yPosition)){
     clearInterval(animator);
-    document.getElementById("stopGame").innerText ="Game Over"
+    document.getElementById("stopGame").innerText ="Game Over";
   }
 };
 //
@@ -55,7 +40,6 @@ const animateSnake=function() {
   let oldHead=snake.getHead();
   let oldTail=snake.move();
   let head=snake.getHead();
-  stopGame(head);
   paintBody(oldHead);
   unpaintSnake(oldTail);
   paintHead(head);
@@ -64,6 +48,7 @@ const animateSnake=function() {
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
   }
+  stopGame(head);
 }
 
 const changeSnakeDirection=function(event) {
@@ -107,7 +92,7 @@ const startGame=function() {
   createFood(numberOfRows,numberOfCols);
   drawFood(food);
   addKeyListener();
-  animator=setInterval(animateSnake,140);
+  animator=setInterval(animateSnake,50);
 }
 
 window.onload=startGame;
