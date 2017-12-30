@@ -35,6 +35,11 @@ const playAgain = function () {
   location.reload();
 };
 
+const updateScore = function () {
+  let game = new Game();
+  document.getElementById("scoreUpdate").innerText = game.addScore();
+};
+
 const animateSnake=function() {
   let oldHead=snake.getHead();
   let oldTail=snake.move();
@@ -47,6 +52,7 @@ const animateSnake=function() {
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
   }
+  updateScore();
   stopGame(head);
 }
 
@@ -79,6 +85,7 @@ const createSnake=function() {
   let head=tail.next().next();
   snake=new Snake(head,body);
 }
+
 
 const createFood=function(numberOfRows,numberOfCols) {
   food=generateRandomPosition(numberOfCols,numberOfRows);
