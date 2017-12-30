@@ -5,3 +5,9 @@ let Game = function () {
 Game.prototype.addScore = function(){
   this.score += 10;
 }
+
+Game.prototype.updateScore = function (head) {
+    if(food.x == head.x && food.y == head.y){
+      this.addScore();
+    };
+}

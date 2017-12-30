@@ -43,7 +43,7 @@ const animateSnake=function() {
   let oldHead=snake.getHead();
   let oldTail=snake.move();
   let head=snake.getHead();
-  updateScore(head);
+  game.updateScore(head);
   paintBody(oldHead);
   unpaintSnake(oldTail);
   paintHead(head);
@@ -87,17 +87,8 @@ const createSnake=function() {
   snake=new Snake(head,body);
 }
 
-
-
 const createFood=function(numberOfRows,numberOfCols) {
   food=generateRandomPosition(numberOfCols,numberOfRows);
-};
-
-const updateScore = function (head) {
-  if(food.x == head.x && food.y == head.y){
-    game.addScore();
-    displayScore(game);
-  }
 };
 
 const startGame=function() {
