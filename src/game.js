@@ -3,6 +3,5 @@ let Game = function () {
 };
 
 Game.prototype.addScore = function(){
-  this.score = 10;
-  return this.score;
+  this.score += 10;
 }

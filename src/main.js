@@ -35,15 +35,15 @@ const playAgain = function () {
   location.reload();
 };
 
-const updateScore = function () {
-  let game = new Game();
-  document.getElementById("scoreUpdate").innerText = game.addScore();
+const displayScore = function () {
+  document.getElementById("scoreUpdate").innerText = game.score;
 };
 
 const animateSnake=function() {
   let oldHead=snake.getHead();
   let oldTail=snake.move();
   let head=snake.getHead();
+  updateScore(head);
   paintBody(oldHead);
   unpaintSnake(oldTail);
   paintHead(head);
@@ -52,7 +52,7 @@ const animateSnake=function() {
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
   }
-  updateScore();
+  displayScore();
   stopGame(head);
 }
 
@@ -78,6 +78,7 @@ const addKeyListener=function() {
 }
 
 const createSnake=function() {
+  game = new Game();
   let tail=new Position(12,10,"east");
   let body=[];
   body.push(tail);
@@ -87,9 +88,17 @@ const createSnake=function() {
 }
 
 
+
 const createFood=function(numberOfRows,numberOfCols) {
   food=generateRandomPosition(numberOfCols,numberOfRows);
-}
+};
+
+const updateScore = function (head) {
+  if(food.x == head.x && food.y == head.y){
+    game.addScore();
+    displayScore(game);
+  }
+};
 
 const startGame=function() {
   createSnake();
@@ -98,7 +107,7 @@ const startGame=function() {
   createFood(numberOfRows,numberOfCols);
   drawFood(food);
   addKeyListener();
-  animator=setInterval(animateSnake,500);
+  animator=setInterval(animateSnake,200);
 }
 
 window.onload=startGame;
